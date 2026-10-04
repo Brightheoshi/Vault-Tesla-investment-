@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Details UI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<style>
+    /* --- Global Styles & Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #0c0f14;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* --- Phone App Container --- */
+.phone-container {
+    width: 100%;
+    max-width: 410px;
+    background-color: #0d1117;
+    border-radius: 24px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #21262d;
+}
+
+/* --- Header / Top Nav Bar --- */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 16px;
+    background-color: #0d1117;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-left i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.nav-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    color: #f0f6fc;
+    cursor: pointer;
+}
+
+/* --- Main Scrollable Content --- */
+.content {
+    padding: 0 16px 20px 16px;
+    flex: 1;
+}
+
+/* --- Asset Badge Component --- */
+.asset-badge {
+    background: linear-gradient(135deg, #16243d 0%, #0f172a 100%);
+    border: 1px solid #1f385c;
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.asset-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.asset-logo {
+    width: 36px;
+    height: 36px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.asset-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.asset-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.asset-balance {
+    font-size: 13px;
+    color: #8b949e;
+    margin-top: 2px;
+}
+
+.ai-btn {
+    background-color: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- Address & QR Card Section --- */
+.address-section {
+    background-color: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 20px;
+    padding: 24px 16px 16px 16px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.network-title {
+    color: #8b949e;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.qr-label {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.qr-container {
+    background-color: #ffffff;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px auto;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.address-box {
+    background-color: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    text-align: left;
+}
+
+.address-text {
+    font-size: 13px;
+    color: #c9d1d9;
+    word-break: break-all;
+    max-width: 70%;
+    line-height: 1.4;
+}
+
+.copy-btn {
+    background: transparent;
+    border: none;
+    color: #8b949e;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    border-left: 1px solid #21262d;
+    padding-left: 12px;
+}
+
+.copy-btn:hover {
+    color: #ffffff;
+}
+
+/* --- Instructions Section --- */
+.instructions-list {
+    list-style: none;
+    padding: 0 4px;
+}
+
+.instructions-list li {
+    font-size: 14px;
+    color: #c9d1d9;
+    margin-bottom: 14px;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 18px;
+}
+
+/* Custom Bullet Points */
+.instructions-list li::before {
+    content: "•";
+    color: #ffffff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 16px;
+}
+
+/* --- Bottom Toolbar Footer --- */
+.bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-top: 1px solid #21262d;
+    background-color: #0d1117;
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.action-btn i {
+    font-size: 18px;
+}
+
+.text-green { color: #22c55e; }
+.text-white { color: #8b949e; }
+.text-white:hover { color: #ffffff; }
+
+.main-deposit-btn {
+    background-color: #22c55e;
+    color: #000000;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+.main-deposit-btn:hover {
+    background-color: #16a34a;
+}
+
+</style>
+<body>
+
+    <div class="phone-container">
+        <!-- Top Navigation Bar -->
+        <header class="nav-bar">
+            <div class="nav-left">
+                <i class="fa-solid fa-arrow-left"></i>
+                <h1 class="nav-title">Deposit: USDT Details</h1>
+            </div>
+            <div class="nav-right">
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </header>
+
+        <!-- Main Content Wrapper -->
+        <main class="content">
+            
+            <!-- Asset Information Badge -->
+            <div class="asset-badge">
+                <div class="asset-info">
+                    <div class="asset-logo">
+                        <i class="fa-solid fa-t"></i>
+                    </div>
+                    <div class="asset-details">
+                        <span class="asset-name">Tether USDT</span>
+                        <span class="asset-balance">$2.50 USD</span>
+                    </div>
+                </div>
+                <button class="ai-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> AI info</button>
+            </div>
+
+            <!-- Address Section -->
+            <div class="address-section">
+                <p class="network-title">Your Unique USDT ERC-20 Deposit Address</p>
+                <p class="qr-label">QR Code Enttrade</p>
+                
+                <!-- QR Code Placeholder -->
+                <div class="qr-container">
+                    <img src="image.png" alt="QR Code" class="qr-image">
+                </div>
+
+                <!-- Copy Address Container -->
+                <div class="address-box">
+                    <div class="address-text">
+                      0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d
+                    </div>
+                    <button class="copy-btn">
+                        <span>Copy Address</span>
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Instructions List -->
+            <ul class="instructions-list">
+                <li>Ensure you are using the Ethereum / ERC-20 network for this address.</li>
+                <li>Incorrect network choice will lead to permanent loss.</li>
+                <li>Minimum deposit: 10 USDT.</li>
+                <li>Funds will reflect after 12 network confirmations (Est. 5-10 mins).</li>
+                <li>Need assistance? Tap the menu icon.</li>
+            </ul>
+
+        </main>
+
+        <!-- Bottom Action Bar -->
+        <footer class="bottom-bar">
+            <button class="action-btn text-green">
+                <i class="fa-solid fa-share-nodes"></i>
+                <span>Share</span>
+            </button>
+            
+         <!--   <button class="main-deposit-btn">
+                <i class="fa-solid fa-lock"></i>
+                <span>Continue to Deposit</span>
+            </button>-->
+
+            <button class="action-btn text-white">
+                <i class="fa-regular fa-trash-can"></i>
+                <span>Bin</span>
+            </button>
+        </footer>
+    </div>
+
+</body>
+</html>

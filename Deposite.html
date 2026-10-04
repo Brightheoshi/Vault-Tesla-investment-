@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Funds</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0b141a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .screen-container {
+            width: 100%;
+            max-width: 410px;
+            background-color: #0d1921;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top App Bar */
+        .app-bar {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background-color: #0d1921;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 16px;
+            margin-top: -10px;
+        }
+
+        .app-title {
+            font-size: 18px;
+            font-weight: 600;
+            flex-grow: 1;
+        }
+
+        .action-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Content Container */
+        .content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Header Card */
+        .header-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .card-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(4px);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wallet-icon {
+            display: inline-block;
+            width: 20px;
+            height: 14px;
+            background-color: #ffffff;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .wallet-icon::after {
+            content: '';
+            position: absolute;
+            right: 2px;
+            top: 4px;
+            width: 4px;
+            height: 6px;
+            background-color: #2a5298;
+            border-radius: 1px;
+        }
+
+        /* Deposit Section */
+        .section-title {
+            font-size: 15px;
+            color: #8fa0af;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .deposit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .method-card {
+            background-color: #13222d;
+            border: 1px solid #1c2e3d;
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+
+        .method-card.selected {
+         /*   border-color: #4cd964;*/
+        }
+
+        .method-card.selected::after {
+            content: '●';
+            color: #4cd964;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 12px;
+        }
+
+        .method-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .coin-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .usdt-logo { background-color: #26a17b; color: white; }
+        .binance-logo { background-color: #f3ba2f; color: #000000; }
+
+        .method-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .method-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .sub-text {
+            font-size: 11px;
+            color: #8fa0af;
+        }
+
+        .wallet-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 4px;
+            width: fit-content;
+        }
+
+        .usdt-tag { background-color: rgba(38, 161, 123, 0.15); color: #26a17b; }
+        .btc-tag { background-color: rgba(243, 186, 47, 0.15); color: #f3ba2f; }
+
+        .amount {
+            font-size: 11px;
+            color: #8fa0af;
+            margin-top: 4px;
+        }
+
+        /* Instructions Container */
+        .instructions-container {
+            background-color: #13222d;
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .warning-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        .warning-icon {
+            color: #ff9500;
+            font-size: 16px;
+        }
+
+        .instruction-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .instruction-item {
+            display: flex;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #e1e7ec;
+        }
+
+        .bullet {
+            color: #ffffff;
+            font-size: 10px;
+            margin-top: 4px;
+        }
+
+        .highlight-text {
+            color: #ff3b30;
+        }
+
+        /* Bottom Action Button */
+        .footer-action {
+            margin-top: auto;
+            padding: 16px;
+        }
+
+        .action-btn {
+            width: 100%;
+            background-color: #76c84d;
+            color: #0b141a;
+            border: none;
+            border-radius: 25px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .action-btn:hover {
+            background-color: #65b33e;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen-container">
+        <!-- App Bar -->
+        <header class="app-bar">
+            <a href="index.html"><button class="back-btn">&#8592;</button></a>
+            <h1 class="app-title">Deposit Funds</h1>
+            <div class="action-icons">
+                <button class="icon-btn">&#9734;</button>
+                <button class="icon-btn">&#8942;</button>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Header Banner -->
+            <div class="header-card">
+               
+                <h2 class="card-title">Deposit to <span class="wallet-icon"></span> Internal Wallet</h2>
+            </div>
+
+            <!-- Deposit Methods -->
+            <div>
+                <h3 class="section-title">Select Deposit Method</h3>
+                <div class="deposit-grid">
+                    <!-- Method 1 -->
+                    <div class="method-card selected" onclick="selectMethod(this)">
+                        <a href="usdtdep.html">
+                        <div class="method-header">
+                            <div class="coin-logo usdt-logo">₮</div>
+                            <div class="method-info">
+                                <span class="method-name">Deposit USDT</span>
+                                <span class="sub-text">Tether USDT</span>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="wallet-tag usdt-tag">&#8594; USDT Wallet</div>
+                        <div class="amount">$2.50 USD</div>
+                    </div>
+
+                    <!-- Method 2 -->
+                    <div class="method-card" onclick="selectMethod(this)">
+                         <a href="Bendep.html">
+                        <div class="method-header">
+                            <div class="coin-logo binance-logo">🔶</div>
+                            <div class="method-info">
+                                <span class="method-name">Deposit via</span>
+                                <span class="sub-text">Binance Pay</span>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="wallet-tag btc-tag">&#8594; BTC Wallet</div>
+                        <div class="amount">$1,000 USD</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions-container">
+                <h3 class="section-title">Deposit Instructions</h3>
+                <div class="warning-header">
+                    <span class="warning-icon">⚠️</span> Ensure
+                </div>
+                <ul class="instruction-list">
+                    <li class="instruction-item">
+                        <span class="bullet">●</span>
+                        <span>Choose your preferred deposit method above.</span>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaultify Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+/* App Container (Simulating Mobile Screen) */
+.app-container {
+    background-color: #0b0e14;
+    width: 100%;
+    height: 100%;
+    max-width: 410px;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.icon-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+/* Reusable Card Styling */
+.card {
+    border-radius: 14px;
+    padding: 16px;
+}
+
+/* Profile Section Card */
+.profile-card {
+    background-color: #3b5cb8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-info h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.profile-info p {
+    font-size: 0.75rem;
+    color: #b0c2f2;
+}
+
+.profile-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+/* Balance Dashboard Card */
+.balance-card {
+    background-color: #4b6fd6;
+}
+
+.card-label {
+    font-size: 0.75rem;
+    color: #b0c2f2;
+    margin-bottom: 6px;
+}
+
+.balance-amount {
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.balance-subtext {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.active-investments {
+    font-size: 0.75rem;
+    color: #b0c2f2;
+    margin-top: 4px;
+}
+
+/* Action Horizontal Layout Group */
+.action-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.btn {
+    border: none;
+    padding: 12px 0;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-deposit {
+    background-color: #a3ff66;
+    color: #000000;
+}
+
+.btn-invest {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.btn-withdraw {
+    background-color: #ffebd1;
+    color: #000000;
+}
+
+/* Live Investments Section Card */
+.investments-card {
+    background-color: #161a24;
+    border: 1px solid #1f2430;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.section-header h3 {
+    font-size: 0.75rem;
+    color: #69707d;
+    letter-spacing: 0.5px;
+}
+
+.see-more {
+    font-size: 0.75rem;
+    color: #69707d;
+    text-decoration: none;
+}
+
+.investment-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 8px;
+}
+
+.investment-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.investment-plan {
+    font-size: 0.75rem;
+    color: #69707d;
+}
+
+/* Progress Tracking Bar Layout */
+.progress-bar {
+    background-color: #242b38;
+    height: 4px;
+    border-radius: 2px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background-color: #a3ff66;
+    height: 100%;
+    width: 60%; /* Tweak value manually to update completion */
+}
+
+/* Interactive Element Actions */
+.btn-logout {
+    background-color: #161a24;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Footer Bottom Layout */
+.app-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.powered-by {
+    font-size: 0.75rem;
+    color: #435368;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.powered-by::before {
+    content: '✦';
+    color: #00d2ff;
+}
+a{
+    text-decoration: none;
+}
+
+</style>
+<body>
+
+    <div class="app-container">
+        <!-- Header Controls 
+        <header class="app-header">
+            <button class="icon-btn back-btn">&#x2190;</button>-->
+           <!-- <div class="header-date">
+                <span class="date">4 Oct &gt;</span>
+                <span class="time">4:12 pm</span>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn">&#x2606;</button>
+                <button class="icon-btn">&#x22EE;</button>
+            </div>
+        </header>-->
+
+        <!-- Profile Card -->
+        <section class="card profile-card">
+            <div class="profile-info">
+                <h2>Hi, Elon musk spacex</h2>
+                <p>Vaultify Member - Level 1</p>
+            </div>
+            <div class="profile-avatar"></div>
+        </section>
+
+        <!-- Balance Card -->
+        <section class="card balance-card">
+            <p class="card-label">All Wallets in USD</p>
+            <h1 class="balance-amount">$11,195,000.00</h1>
+            <p class="balance-subtext">$285.19</p>
+            <p class="active-investments">+ 6 Active Investments</p>
+        </section>
+
+        <!-- Action Buttons -->
+        <section class="action-group">
+            <button class="btn btn-deposit"><a href="Deposite.html">Deposite</a></button>
+            <button class="btn btn-invest"> <a href="Invest.html">Invest</a></button>
+            <button class="btn btn-withdraw"><a href="Withdraw.html">Withdraw</a></button>
+        </section>
+
+        <!-- Live Investments -->
+        <section class="card investments-card">
+            <div class="section-header">
+                <h3>LIVE INVESTMENTS</h3>
+                <a href="#" class="see-more">See More</a>
+            </div>
+            <div class="investment-item">
+                <div class="investment-details">
+                    <span class="investment-name">Tesla</span>
+                    <span class="investment-plan">$1,000 - Premium</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logout Button -->
+        <button class="btn-logout">Logout</button>
+
+        <!-- Footer Attribution -->
+        <footer class="app-footer">
+            <span class="powered-by">Powered by Netlify</span>
+        </footer>
+    </div>
+
+</body>
+</html>

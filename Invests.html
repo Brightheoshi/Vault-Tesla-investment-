@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantitative Trade UI</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Main Container mimicking the mobile screen area */
+        .trade-container {
+            background-color: #0d0d0d;
+            width: 100%;
+            max-width: 380px;
+            height: 100%;
+            border-radius: 30px;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Header Layout */
+        .header {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+
+        .back-arrow {
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            left: 0;
+        }
+
+        .header-title {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Time Block Option Cards */
+        .time-card {
+            background: linear-gradient(135deg, #222222 0%, #161616 100%);
+            border-radius: 16px;
+            padding: 24px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .time-card:hover {
+            transform: scale(1.02);
+            border-color: #333;
+        }
+
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Clock Icon Custom Styling */
+        .clock-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fab818;
+            border-radius: 50%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .clock-icon::after {
+            content: '';
+            position: absolute;
+            background-color: #fab818;
+            width: 2px;
+            height: 6px;
+            top: 3px;
+            left: 7px;
+        }
+
+        .clock-icon::before {
+            content: '';
+            position: absolute;
+            background-color: #fab818;
+            width: 4px;
+            height: 2px;
+            top: 7px;
+            left: 7px;
+        }
+
+        .time-label {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .time-number {
+            color: #fab818;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* Bottom Segmented Action Grid */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .action-btn {
+            background-color: #1a1a1a;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .action-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .btn-orange svg {
+            fill: #fab818;
+        }
+
+        .btn-white svg {
+            fill: #ffffff;
+        }
+
+        /* Bottom Floating Home Indicator */
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+            padding-top: 40px;
+        }
+
+        .home-polygon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: #fab818;
+            stroke-width: 2;
+            cursor: pointer;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="trade-container">
+        <!-- Header -->
+        <div class="header">
+            <a href=second.html class="back-arrow">&#8592;</a>
+            <div class="header-title">Quantitative trade</div>
+        </div>
+
+        <!-- 2 Hours Option -->
+       <a href="2hrs.html"> <div class="time-card">
+            <div class="card-left">
+                <span class="clock-icon"></span>
+                <span class="time-label">$200</span>
+            </div>
+            <div class="time-number">2days</div>
+        </div></a>
+
+        <!-- 4 Hours Option -->
+        <a href="4hrs.html"><div class="time-card">
+            <div class="card-left">
+                <span class="clock-icon"></span>
+                <span class="time-label">$500</span>
+            </div>
+            <div class="time-number">5days</div>
+        </div></a>
+
+        <!-- 6 Hours Option -->
+        <a href="6hrs.html"><div class="time-card">
+            <div class="card-left">
+                <span class="clock-icon"></span>
+                <span class="time-label">$1000</span>
+            </div>
+            <div class="time-number">7days</div>
+        </div></a>
+
+        <!-- 12 Hours Option -->
+        <a href="8hrs.html"><div class="time-card">
+            <div class="card-left">
+                <span class="clock-icon"></span>
+                <span class="time-label">$10000</span>
+            </div>
+            <div class="time-number">28days</div>
+        </div></a>
+
+        <!-- Lower Grid Tabs -->
+        <div class="action-grid">
+            <button class="action-btn btn-orange">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"/>
+                </svg>
+            </button>
+            <button class="action-btn btn-white">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Navigation Element -->
+        <div class="footer-nav">
+            <svg class="home-polygon" viewBox="0 0 24 24">
+                <polygon points="12,2 22,9 18,22 6,22 2,9"/>
+            </svg>
+        </div>
+    </div>
+
+</body>
+</html>

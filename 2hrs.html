@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantitative Trade UI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for a clean sans-serif look -->
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<style>
+    /* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #0c0d0e;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* App Wrapper Container */
+.app-container {
+    background-color: #121315;
+    width: 100%;
+    max-width: 412px; /* Emulates standard smartphone width */
+    height: 840px;
+    border-radius: 16px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.back-btn {
+    font-size: 20px;
+    cursor: pointer;
+    color: #e2e8f0;
+    border: 1px solid #333;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-right: 32px; /* Offsets back button width to center text perfectly */
+}
+
+/* Badge Layout */
+.badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 0 4px;
+}
+
+.hours-badge {
+    background-color: #1a1c1e;
+    border: 1px solid #fbbf24;
+    border-radius: 20px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.v-icon {
+    color: #fbbf24;
+    border: 1.5px solid #fbbf24;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.large-number {
+    font-size: 72px;
+    font-weight: 700;
+    color: #fbbf24;
+    line-height: 1;
+}
+
+/* Central Yellow Card */
+.yellow-card {
+    background-color: #ffcc00;
+    border-radius: 24px;
+    padding: 20px;
+    margin-bottom: 32px;
+    color: #000000;
+}
+
+.wallet-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.wallet-icon {
+    background-color: #121315;
+    color: #ffffff;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.balance-text {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.amount {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.currency {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Input Fields Inside Card */
+.payment-input {
+    width: 100%;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 14px;
+    outline: none;
+}
+
+.payment-input::placeholder {
+    color: #a3a3a3;
+}
+
+/* Card Selection Buttons */
+.fraction-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.fraction-btn {
+    flex: 1;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.fraction-btn:active {
+    opacity: 0.8;
+}
+
+/* Informational Text Lists */
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 4px;
+    margin-bottom: auto; /* Pushes the main CTA button to the bottom */
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.label {
+    color: #64748b;
+}
+
+.value {
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+/* Bottom Confirmation Button */
+.submit-btn {
+    background-color: #ffcc00;
+    width: 100%;
+    border: none;
+    border-radius: 24px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.check-icon {
+    background-color: #000000;
+    color: #ffcc00;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+</style>
+<body>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <a href="invest.html"><div class="back-btn">&#x2190;</div></a>
+            <div class="title">Quantitative trade</div>
+            <div class="spacer"></div>
+        </header>
+
+        <!-- Hours Badge Row -->
+        <div class="badge-row">
+            <div class="hours-badge">
+                <span class="v-icon">V</span>
+                <span>2days</span>
+            </div>
+            <div class="large-number">2</div>
+        </div>
+
+        <!-- Main Yellow Card -->
+        <div class="yellow-card">
+            <div class="wallet-section">
+                <div class="wallet-icon">
+                    <!-- Simple SVG representation of the wallet icon -->
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M19 5H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 12H5V7h14v10zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                </div>
+                <div class="balance-text">
+                    <span class="amount">0.21</span>
+                    <span class="currency">USDT</span>
+                </div>
+            </div>
+
+            <!-- Input Field -->
+            <input type="text" class="payment-input" placeholder="Payment amount">
+
+            <!-- Fraction Buttons -->
+            <div class="fraction-buttons">
+                <button class="fraction-btn">1/4</button>
+                <button class="fraction-btn">1/3</button>
+                <button class="fraction-btn">1/2</button>
+                <button class="fraction-btn all-btn">ALL</button>
+            </div>
+        </div>
+
+        <!-- Info List Details -->
+        <div class="info-list">
+            <div class="info-item">
+                <span class="label">investmentamount:</span>
+                <span class="value">0.00USDT</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Cucle:</span>
+                <span class="value">2 days</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Estimated income:</span>
+                <span class="value">0.00USDT</span>
+            </div>
+        </div>
+
+        <!-- Bottom Action Button -->
+        <button class="submit-btn">
+            <span class="check-icon">&#x2713;</span>
+        </button>
+    </div>
+
+</body>
+</html>
